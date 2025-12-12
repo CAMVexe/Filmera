@@ -17,9 +17,11 @@ public partial class FilmeraContext : DbContext
 
     public virtual DbSet<Pelicula> Peliculas { get; set; }
 
+    public virtual DbSet<Serie> Series { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=CAMVCHAR\\SQLEXPRESS;Database=Filmera;Trusted_Connection=True;TrustServerCertificate=True;");
+        => optionsBuilder.UseSqlServer("Server= CAMVCHAR\\SQLEXPRESS;Database=Filmera;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -33,6 +35,29 @@ public partial class FilmeraContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.Director)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Genero)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Publico)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Sinopsis)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.Titulo)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<Serie>(entity =>
+        {
+            entity.HasKey(e => e.IdSerie).HasName("PK__Serie__13B9BEAD5E8F9B22");
+
+            entity.ToTable("Serie");
+
+            entity.Property(e => e.IdSerie)
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.Genero)

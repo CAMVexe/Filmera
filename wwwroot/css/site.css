@@ -1,31 +1,244 @@
-html {
-  font-size: 14px;
+/* =========================================================
+   FILMERA — Dark Streaming Theme (Purple)
+   ========================================================= */
+
+/* ---------- Variables ---------- */
+:root {
+    --bg-900: #0F0F14;
+    --bg-800: #18181C;
+    --bg-700: #202226;
+    --text-main: #F5F5F7;
+    --text-muted: #9CA3AF;
+    --text-dark: #111827;
+    --brand: #7C3AED;
+    --brand-hover: #5B21B6;
+    --brand-focus: rgba(124,58,237,.15);
+    --radius: 12px;
+    --shadow-soft: 0 10px 30px rgba(2,6,23,.6);
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+/* ---------- Base ---------- */
+html, body {
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(180deg,var(--bg-900),#09090b 120%);
+    color: var(--text-main);
+    font-family: "Segoe UI",Roboto,Arial,sans-serif;
+    line-height: 1.5;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-main);
+    font-weight: 600;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+p, small {
+    color: var(--text-muted);
 }
 
-body {
-  margin-bottom: 60px;
+/* ---------- Navbar ---------- */
+.navbar {
+    background: transparent;
+    border-bottom: 1px solid rgba(255,255,255,.05);
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+.brand-logo {
+    height: 42px;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+/* ---------- Buttons ---------- */
+.btn {
+    border-radius: .6rem;
+    transition: .15s ease;
+}
+
+.btn-primary,
+.btn-brand {
+    background: var(--brand);
+    color: #fff;
+    border: none;
+}
+
+    .btn-primary:hover,
+    .btn-brand:hover {
+        background: var(--brand-hover);
+    }
+
+/* ---------- Forms ---------- */
+.form-control,
+.form-select {
+    background: #fff;
+    color: var(--text-dark);
+    border: 1px solid #d1d5db;
+    border-radius: .5rem;
+}
+
+    .form-select option {
+        color: var(--text-dark);
+    }
+
+/* ---------- Cards ---------- */
+.card {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.05);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+}
+
+/* ---------- ASIDE / FILTROS ---------- */
+.peliculas-aside .card {
+    background: #fff;
+}
+
+.peliculas-aside h6,
+.peliculas-aside .card-title {
+    color: #111827;
+    font-weight: 700;
+}
+
+.peliculas-aside label {
+    color: #374151;
+    font-weight: 600;
+}
+
+/* ---------- TABLE ---------- */
+.peliculas-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: .9rem;
+}
+
+    .peliculas-table thead th {
+        background: #e5e7eb;
+        color: #111827;
+        font-weight: 600;
+        padding: .8rem;
+        border-bottom: 2px solid #d1d5db;
+    }
+
+    .peliculas-table tbody tr {
+        background: #f9fafb;
+    }
+
+        .peliculas-table tbody tr:nth-child(even) {
+            background: #eef0f3;
+        }
+
+        .peliculas-table tbody tr:hover {
+            background: rgba(124,58,237,.12);
+        }
+
+    .peliculas-table td {
+        padding: .85rem;
+        color: #1f2937;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+        .peliculas-table td:nth-child(2) {
+            font-weight: 600;
+            color: #111827;
+        }
+
+/* Footer — fixed layout safe */
+.site-footer {
+    margin-top: auto;
+    padding: 1rem 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    color: #ffffff;
+}
+
+    .site-footer strong {
+        color: #ffffff;
+    }
+
+    .site-footer a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+        .site-footer a:hover {
+            color: var(--brand);
+        }
+
+
+
+/* ---------- Responsive ---------- */
+@media(max-width:576px) {
+    .brand-logo {
+        height: 34px;
+    }
+}
+
+/* ===============================
+   FILMERA — Edit Action Button
+   =============================== */
+
+.btn-edit {
+    background: linear-gradient( 180deg, rgba(124,58,237,0.18), rgba(124,58,237,0.10) );
+    color: var(--text-100);
+    border: 1px solid rgba(124,58,237,0.45);
+    border-radius: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: background 0.15s ease, transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+    .btn-edit i {
+        opacity: 0.9;
+    }
+
+    .btn-edit:hover {
+        background: linear-gradient( 180deg, rgba(124,58,237,0.30), rgba(124,58,237,0.18) );
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(124,58,237,0.25);
+        color: #ffffff;
+    }
+
+    .btn-edit:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px var(--brand-focus);
+    }
+
+    .btn-edit:active {
+        transform: translateY(0);
+        box-shadow: none;
+    }
+
+/* ===============================
+   FILMERA — TempData / Alerts
+   =============================== */
+
+/* Reemplazar el azul por morado Filmera */
+.alert-info {
+    background: linear-gradient( 180deg, rgba(124,58,237,0.18), rgba(124,58,237,0.10) );
+    color: #ffffff;
+    border: 1px solid rgba(124,58,237,0.45);
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 24px rgba(124,58,237,0.25);
+    font-weight: 500;
+}
+
+    /* Iconos o texto fuerte */
+    .alert-info strong {
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+/* Animación suave de entrada */
+.alert-info {
+    animation: filmera-alert-in 0.25s ease-out;
+}
+
+@keyframes filmera-alert-in {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

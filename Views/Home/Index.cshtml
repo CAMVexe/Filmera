@@ -1,8 +1,39 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="filmera-hero d-flex flex-column justify-content-center align-items-center text-center">
+
+    <img src="/images/Logo.jpg"
+         alt="Filmera"
+         class="filmera-logo mb-4" />
+
+    <h1 class="display-5 fw-bold text-white">
+        Historias que se ven
+    </h1>
+
+    <p class="lead text-light mt-3 mb-4">
+        Dale play a tu entretenimiento
+    </p>
+
+    <div class="d-flex gap-3">
+        <a class="btn btn-brand btn-lg"
+           asp-controller="Peliculas"
+           asp-action="Index"
+           role="button"
+           aria-label="Ver películas">
+            Ver películas
+        </a>
+
+        <a class="btn btn-outline-light btn-lg"
+           asp-controller="Series"
+           asp-action="Index"
+           role="button"
+           aria-label="Ver series">
+            Ver series
+        </a>
+    </div>
+
 </div>
+
+

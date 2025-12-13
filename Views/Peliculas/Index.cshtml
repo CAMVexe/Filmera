@@ -1,153 +1,160 @@
 ﻿@model IEnumerable<Filmera.Models.Pelicula>
 
-﻿@{
+@{
     ViewData["Title"] = "Películas registradas";
     var msg = TempData["Mensaje"] as string;
 }
 
-<h1>@ViewData["Title"]</h1>
-
-@if (!string.IsNullOrEmpty(msg))
-{
-    <div class="alert alert-info" role="alert">
-        @msg
-    </div>
-}
-
-<form asp-action="BuscarMov" method="post" class="row g-2">
-    <div class="col-9">
-        <input id="titulo" name="titulo" type="text" class="form-control" placeholder="Nombre de la película" />
-    </div>
-    <div class="col-3 d-grid">
-        <button type="submit" class="btn btn-primary"><i class="bi bi-search me-2"></i>Buscar</button>
-    </div>
-
-    <a class="btn btn-primary" asp-controller="Peliculas" asp-action="Index">
-        <i class="bi bi-person-plus me-2"></i>Mostrar todas
-    </a>
-</form>
-
-<p>
-    <a class="btn btn-primary" asp-controller="Peliculas" asp-action="Create">
-        <i class="bi bi-person-plus me-2"></i>Añadir Pelicula
-    </a>
-</p>
-
-@if (!Model.Any())
-{
-    <p>No hay películas registradas aun</p>
-}
-else
-{
-    <table class="table table-dark table-striped">
-        <thead>
-            <tr>
-                <th>Codigo Pelicula</th>
-                <th>Titulo</th>
-                <th>Sinopsis</th>
-                <th>Director</th>
-                <th>Genero</th>
-                <th>Duracion (minutos)</th>
-                <th>Calificacion (0 - 100)</th>
-                <th>Lanzamiento (año)</th>
-                <th>Publico</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var p in Model)
+<div class="container-fluid py-4">
+    <div class="row mb-3 align-items-center">
+        <div class="col-lg-9">
+            <h1 class="mb-0">@ViewData["Title"]</h1>
+            @if (!string.IsNullOrEmpty(msg))
             {
-                <tr>
-                    <td>@p.IdPelicula</td>
-                    <td>@p.Titulo</td>
-                    <td>@p.Sinopsis</td>
-                    <td>@p.Director</td>
-                    <td>@p.Genero</td>
-                    <td>@p.Duracion</td>
-                    <td>@p.Calificacion</td>
-                    <td>@p.Lanzamiento</td>
-                    <td>@p.Publico</td>
-                </tr>
+                <div class="alert alert-info mt-3" role="alert">@msg</div>
             }
-        </tbody>
-    </table>
-
-    <br />
-    <hr />
-    <br />
-
-    // Formulario para editar la información de una película
-    <h5 class="card-title">Actualizar película</h5>
-    <form asp-action="Edit" method="get" class="row g-2">
-        <div class="col-8">
-            <input id="EditarPelicula" name="IdPelicula" type="text" class="form-control" placeholder="Código identificador de película" />
         </div>
-        <div class="col-4 d-grid">
-            <button type="submit" class="btn btn-outline-warning"><i class="bi bi-pencil me-2"></i>Actualizar</button>
+
+        <div class="col-lg-3 d-flex gap-2 justify-content-lg-end mt-3 mt-lg-0">
+            <form asp-action="BuscarMov" method="post" class="d-flex w-100">
+                <input id="titulo" name="titulo" type="text" class="form-control form-control-sm me-2" placeholder="Nombre de la película" />
+                <button type="submit" class="btn btn-brand btn-sm"><i class="bi bi-search me-1"></i>Buscar</button>
+            </form>
         </div>
-    </form>
-
-    <br />
-    <hr />
-    <br />
-
-    // Eliminar película
-    <h5 class="card-title">Eliminar película</h5>
-    <form asp-action="Delete" method="post" class="row g-2">
-        <div class="col-8">
-            <input id="EliminarMov" name="IdPelicula" type="text" class="form-control" placeholder="Código identificador de película" />
-        </div>
-        <div class="col-4 d-grid">
-            <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash-fill me-2"></i>Eliminar</button>
-        </div>
-    </form>
-
-    <br />
-    <hr />
-    <br />
-
-    // Consultas Linq
-    <h5 class="card-title">Filtros</h5>
-
-    <div class="row g-2 mb-3">
-        <form asp-action="FiltroGenero" method="post" class="col-md-6 d-flex">
-            <select name="genero" class="form-select me-2">
-                <option value="">Seleccione...</option>
-                <option value="Acción">Acción</option>
-                <option value="Terror">Terror</option>
-                <option value="Romance">Romance</option>
-                <option value="Suspenso">Suspenso</option>
-                <option value="Comedia">Comedia</option>
-                <option value="Fantasía">Fantasía</option>
-                <option value="Animación">Animación</option>
-                <option value="Drama">Drama</option>
-            </select>
-            <button type="submit" class="btn btn-secondary">Filtrar por género</button>
-        </form>
-
-        <form asp-action="FiltroClasificacion" method="post" class="col-md-6 d-flex">
-            <select name="publico" class="form-select me-2">
-                <option value="">Seleccione...</option>
-                <option value="G">G (Todo público)</option>
-                <option value="PG">PG (Supervisión de padres recomendada)</option>
-                <option value="PG-13">PG-13 (No apta para menores de 13)</option>
-                <option value="R">R (Restringida, menores requieren adulto)</option>
-                <option value="NC-17">NC-17 (Solo adultos)</option>
-            </select>
-            <button type="submit" class="btn btn-secondary">Filtrar por público</button>
-        </form>
     </div>
 
-    <h5 class="card-title">Orden</h5>
+    <div class="row g-4">
+        <!-- Tabla principal (más espacio) -->
+        <main class="col-lg-9 peliculas-main">
+            <div class="card p-3">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-brand btn-sm" asp-controller="Peliculas" asp-action="Create">
+                            <i class="bi bi-plus-lg me-1"></i>Añadir Película
+                        </a>
+                        <a class="btn btn-outline-secondary btn-sm" asp-controller="Peliculas" asp-action="Index">
+                            <i class="bi bi-list-ul me-1"></i>Mostrar todas
+                        </a>
+                    </div>
+                </div>
 
-    <div class="col-md-6 d-flex align-items-center">
-        <a class="btn btn-secondary w-100" asp-action="OrderTitulo"><i class="bi bi-sort-alpha-down me-2"></i>Alfabético</a>
-    </div>
+                @if (!Model.Any())
+                {
+                    <div class="p-4 text-muted-custom">No hay películas registradas aún.</div>
+                }
+                else
+                {
+                    <table class="table mb-0 peliculas-table">
+                        <thead>
+                            <tr>
+                                <th>Codigo Película</th>
+                                <th>Título</th>
+                                <th>Sinopsis</th>
+                                <th>Director</th>
+                                <th>Género</th>
+                                <th>Duración</th>
+                                <th>Calificación</th>
+                                <th>Año Lanzamiento</th>
+                                <th>Público</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in Model)
+                            {
+                                <tr>
+                                    <td class="align-middle">@p.IdPelicula</td>
+                                    <td class="align-middle fw-semibold">@p.Titulo</td>
+                                    <td class="align-middle">
+                                        <div class="truncate-ellipsis">@p.Sinopsis</div>
+                                    </td>
+                                    <td class="align-middle">@p.Director</td>
+                                    <td class="align-middle">@p.Genero</td>
+                                    <td class="align-middle">@p.Duracion</td>
+                                    <td class="align-middle">@p.Calificacion</td>
+                                    <td class="align-middle">@p.Lanzamiento</td>
+                                    <td class="align-middle">@p.Publico</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </main>
 
-    <div class="col-md-6 d-flex align-items-center">
-        <a class="btn btn-secondary w-100" asp-action="OrderFecha"><i class="bi bi-sort-alpha-down me-2"></i>Más recientes</a>
-    </div>
+        <!-- Aside: botones (acciones/orden) y filtros agrupados -->
+        <aside class="col-lg-3 peliculas-aside">
+            <div class="card p-3 mb-3">
+                <h5 class="card-title mb-3">Acciones y orden</h5>
+                <h6 class="mt-3 mb-2">Actualizar película</h6>
+                <form asp-action="Edit" method="get" class="row g-2 mb-3">
+                    <div class="col-8">
+                        <input name="IdPelicula"
+                               type="text"
+                               class="form-control"
+                               placeholder="Código identificador de película" />
+                    </div>
+                    <div class="col-4 d-grid">
+                        <button type="submit" class="btn btn-edit">
+                            <i class="bi bi-pencil me-2"></i>Actualizar
+                        </button>
+                    </div>
+                </form>
 
-    <div class="col-md-6 d-flex align-items-center">
-        <a class="btn btn-secondary w-100" asp-action="OrderRating"><i class="bi bi-sort-alpha-down me-2"></i>Mejor valoradas</a>
+                <h6 class="mt-3 mb-2">Eliminar película</h6>
+                <form asp-action="Delete" method="post" class="row g-2">
+                    <div class="col-8">
+                        <input name="IdPelicula"
+                               type="text"
+                               class="form-control"
+                               placeholder="Código identificador de película" />
+                    </div>
+                    <div class="col-4 d-grid">
+                        <button type="submit" class="btn btn-edit btn-delete">
+                            <i class="bi bi-trash-fill me-2"></i>Eliminar
+                        </button>
+                    </div>
+                </form>
+
+
+                <h6 class="mt-3 mb-2">Orden</h6>
+                <div class="d-grid gap-2">
+                    <a class="btn btn-outline-secondary btn-sm" asp-action="OrderTitulo"><i class="bi bi-sort-alpha-down me-1"></i>Alfabético</a>
+                    <a class="btn btn-outline-secondary btn-sm" asp-action="OrderFecha"><i class="bi bi-calendar-event me-1"></i>Más recientes</a>
+                    <a class="btn btn-outline-secondary btn-sm" asp-action="OrderRating"><i class="bi bi-star-fill me-1"></i>Mejor valoradas</a>
+                </div>
+            </div>
+
+            <div class="card p-3">
+                <h5 class="card-title mb-3">Filtros</h5>
+                <form asp-action="FiltroGenero" method="post" class="mb-3">
+                    <label class="small text-muted mb-1">Género</label>
+                    <select name="genero" class="form-select form-select-sm mb-2">
+                        <option value="">Todos</option>
+                        <option value="Acción">Acción</option>
+                        <option value="Terror">Terror</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Suspenso">Suspenso</option>
+                        <option value="Comedia">Comedia</option>
+                        <option value="Fantasía">Fantasía</option>
+                        <option value="Animación">Animación</option>
+                        <option value="Drama">Drama</option>
+                    </select>
+                    <button type="submit" class="btn btn-secondary btn-sm w-100">Filtrar</button>
+                </form>
+
+                <form asp-action="FiltroClasificacion" method="post">
+                    <label class="small text-muted mb-1">Clasificación</label>
+                    <select name="publico" class="form-select form-select-sm mb-2">
+                        <option value="">Todos</option>
+                        <option value="G">G</option>
+                        <option value="PG">PG</option>
+                        <option value="PG-13">PG-13</option>
+                        <option value="R">R</option>
+                        <option value="NC-17">NC-17</option>
+                    </select>
+                    <button type="submit" class="btn btn-secondary btn-sm w-100">Filtrar</button>
+                </form>
+            </div>
+        </aside>
     </div>
-}
+</div>

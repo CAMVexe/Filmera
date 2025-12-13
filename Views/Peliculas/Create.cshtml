@@ -12,7 +12,7 @@
     @* IdPelicula *@
     <div class="mb-3">
         <label asp-for="IdPelicula" class="form-label"></label>
-        <input asp-for="IdPelicula" class="form-control" placeholder="Sin espacios, ej: 102340567" />
+        <input asp-for="IdPelicula" class="form-control" placeholder="Ej: MOV-01" />
         <span asp-validation-for="IdPelicula" class="text-danger"></span>
     </div>
 
@@ -26,7 +26,7 @@
     @* Sinopsis *@
     <div class="mb-3">
         <label asp-for="Sinopsis" class="form-label"></label>
-        <input asp-for="Sinopsis" class="form-control" />
+        <input asp-for="Sinopsis" class="form-control" placeholder="Muy breve" />
         <span asp-validation-for="Sinopsis" class="text-danger"></span>
     </div>
 
@@ -57,7 +57,7 @@
     @* Duración *@
     <div class="mb-3">
         <label asp-for="Duracion" class="form-label"></label>
-        <input asp-for="Duracion" class="form-control" />
+        <input asp-for="Duracion" class="form-control" placeholder="En minutos" />
         <span asp-validation-for="Duracion" class="text-danger"></span>
     </div>
 
@@ -71,7 +71,7 @@
     @* Lanzamiento *@
     <div class="mb-3">
         <label asp-for="Lanzamiento" class="form-label"></label>
-        <input asp-for="Lanzamiento" class="form-control" />
+        <input asp-for="Lanzamiento" class="form-control" placeholder="Año formato 'AAAA''" />
         <span asp-validation-for="Lanzamiento" class="text-danger"></span>
     </div>
 

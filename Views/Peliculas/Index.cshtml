@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Filmera.Models.Pelicula>
 
 @{
-    ViewData["Title"] = "Películas registradas";
+    ViewData["Title"] = "Catálogo Películas";
     var msg = TempData["Mensaje"] as string;
 }
 
@@ -24,7 +24,7 @@
     </div>
 
     <div class="row g-4">
-        <!-- Tabla principal (más espacio) -->
+        <!-- Tabla -->
         <main class="col-lg-9 peliculas-main">
             <div class="card p-3">
                 <div class="d-flex justify-content-between align-items-start mb-3">
@@ -52,7 +52,7 @@
                                 <th>Sinopsis</th>
                                 <th>Director</th>
                                 <th>Género</th>
-                                <th>Duración</th>
+                                <th>Duración (minutos)</th>
                                 <th>Calificación</th>
                                 <th>Año Lanzamiento</th>
                                 <th>Público</th>

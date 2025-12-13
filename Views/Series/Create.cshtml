@@ -1,5 +1,96 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model Filmera.Models.Serie
+
+﻿@{
+    ViewData["Title"] = "Añadir serie";
 }
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    @* IdSerie *@
+    <div class="mb-3">
+        <label asp-for="IdSerie" class="form-label"></label>
+        <input asp-for="IdSerie" class="form-control" placeholder="Sin espacios, ej: 102340567" />
+        <span asp-validation-for="IdSerie" class="text-danger"></span>
+    </div>
+
+    @* Título *@
+    <div class="mb-3">
+        <label asp-for="Titulo" class="form-label"></label>
+        <input asp-for="Titulo" class="form-control" />
+        <span asp-validation-for="Titulo" class="text-danger"></span>
+    </div>
+
+    @* Sinopsis *@
+    <div class="mb-3">
+        <label asp-for="Sinopsis" class="form-label"></label>
+        <input asp-for="Sinopsis" class="form-control" />
+        <span asp-validation-for="Sinopsis" class="text-danger"></span>
+    </div>
+
+    @* Genero *@
+    <div class="mb-3">
+        <label asp-for="Genero" class="form-label"></label>
+        <select asp-for="Genero" class="form-select">
+            <option value="">Seleccione...</option>
+            <option value="Acción">Acción</option>
+            <option value="Terror">Terror</option>
+            <option value="Romance">Romance</option>
+            <option value="Suspenso">Suspenso</option>
+            <option value="Comedia">Comedia</option>
+            <option value="Fantasía">Fantasía</option>
+            <option value="Animación">Animación</option>
+            <option value="Drama">Drama</option>
+        </select>
+        <span asp-validation-for="Genero" class="text-danger"></span>
+    </div>
+
+    @* Temporadas *@
+    <div class="mb-3">
+        <label asp-for="Temporadas" class="form-label"></label>
+        <input asp-for="Temporadas" class="form-control" />
+        <span asp-validation-for="Temporadas" class="text-danger"></span>
+    </div>
+
+    @* Episodios *@
+    <div class="mb-3">
+        <label asp-for="Episodios" class="form-label"></label>
+        <input asp-for="Episodios" class="form-control" />
+        <span asp-validation-for="Episodios" class="text-danger"></span>
+    </div>
+
+    @* Calificación *@
+    <div class="mb-3">
+        <label asp-for="Calificacion" class="form-label"></label>
+        <input asp-for="Calificacion" class="form-control" />
+        <span asp-validation-for="Calificacion" class="text-danger"></span>
+    </div>
+
+    @* Lanzamiento *@
+    <div class="mb-3">
+        <label asp-for="Lanzamiento" class="form-label"></label>
+        <input asp-for="Lanzamiento" class="form-control" />
+        <span asp-validation-for="Lanzamiento" class="text-danger"></span>
+    </div>
+
+    @* Publico *@
+    <div class="mb-3">
+        <label asp-for="Publico" class="form-label"></label>
+        <select asp-for="Publico" class="form-select">
+            <option value="">Seleccione...</option>
+            <option value="Y">TV-Y (Apto para niños pequeños)</option>
+            <option value="Y7">TV-Y7 (Para 7 años en adelante)</option>
+            <option value="G">TV-G (Todo público)</option>
+            <option value="PG">TV-PG (Supervisión de padres recomendada)</option>
+            <option value="TV-14">TV-14 (No apta para menores de 14)</option>
+            <option value="MA">TV-MA (Solo adultos)</option>
+        </select>
+        <span asp-validation-for="Publico" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Añadir</button>
+
+    <a class="btn btn-secondary" asp-action="Index">Volver</a>
+</form>

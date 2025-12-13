@@ -14,16 +14,19 @@ public partial class Pelicula
     // Título
     [Required(ErrorMessage = "Para poder agregar la película es necesario ingresar el título")]
     [MinLength(2, ErrorMessage = "El nombre debe tener al menos 2 caracteres")]
+    [MaxLength(50, ErrorMessage = "El nombre no puede exceder los 50 caracteres")]
     public string Titulo { get; set; } = string.Empty;
 
     // Sinopsis
     [Required(ErrorMessage = "Para poder agregar la película es necesario ingresar la sinopsis")]
     [MinLength(10, ErrorMessage = "La sinopsis tiene que dar al menos una ligera idea de la película, utilizar al menos 10 caracteres")]
+    [MaxLength(100, ErrorMessage = "El nombre no puede exceder los 100 caracteres")]
     public string Sinopsis { get; set; } = string.Empty;
 
     // Director
     [Required(ErrorMessage = "Para poder agregar la película es necesario ingresar el director")]
     [MinLength(5, ErrorMessage = "Nombre del director muy pequeño, si no lo ha hecho ingrese también el apellido")]
+    [MaxLength(50, ErrorMessage = "El nombre del director no puede exceder los 50 caracteres")]
     public string Director { get; set; } = string.Empty;
 
     // Genero

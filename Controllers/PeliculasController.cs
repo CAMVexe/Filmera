@@ -48,6 +48,7 @@ namespace Filmera.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // Buscar película por título
         [HttpPost]
         public IActionResult BuscarMov(string titulo)
         {
@@ -62,44 +63,6 @@ namespace Filmera.Controllers
             if (resultado.Count == 0)
             {
                 TempData["Mensaje"] = $"No se encontraron películas con el titulo '{titulo}'.";
-                return RedirectToAction(nameof(Index));
-            }
-
-            return View("Index", resultado);
-        }
-
-        [HttpPost]
-        public IActionResult FiltroGenero(string genero)
-        {
-            if (string.IsNullOrWhiteSpace(genero))
-            {
-                TempData["Mensaje"] = "Mostrando todas las películas, si desea filtrar por género, seleccione una opción.";
-                return RedirectToAction(nameof(Index));
-            }
-
-            var resultado = _context.Peliculas.Where(p => p.Genero == genero).ToList();
-            if (!resultado.Any())
-            {
-                TempData["Mensaje"] = $"No se encontraron películas del género '{genero}'.";
-                return RedirectToAction(nameof(Index));
-            }
-
-            return View("Index", resultado);
-        }
-
-        [HttpPost]
-        public IActionResult FiltroClasificacion(string publico)
-        {
-            if (string.IsNullOrWhiteSpace(publico))
-            {
-                TempData["Mensaje"] = "Mostrando todas las películas. Si desea filtrar por público, seleccione una opción.";
-                return RedirectToAction(nameof(Index));
-            }
-
-            var resultado = _context.Peliculas.Where(p => p.Publico == publico).ToList();
-            if (!resultado.Any())
-            {
-                TempData["Mensaje"] = $"No se encontraron películas para el público '{publico}'.";
                 return RedirectToAction(nameof(Index));
             }
 
@@ -136,31 +99,70 @@ namespace Filmera.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            _context.Entry(existing).CurrentValues.SetValues(pelicula); // Entry(r) = obtiene registro r | CurrentValues = valores actuales del registro | SetValues(m) = asigna los valores del peliculao m
+            _context.Entry(existing).CurrentValues.SetValues(pelicula); // Entry(r) = obtiene registro r | CurrentValues = valores actuales del registro | SetValues(m) = asigna los valores del modelo m
             _context.SaveChanges();
 
             TempData["Mensaje"] = $"Película '{pelicula.Titulo}' actualizado correctamente.";
             return RedirectToAction(nameof(Index));
         }
 
+        // Eliminar película
         public IActionResult Delete(string IdPelicula)
         {
-            var producto = _context.Peliculas.Find(IdPelicula);
+            var pelicula = _context.Peliculas.Find(IdPelicula);
 
-            if (producto == null)
+            if (pelicula == null)
             {
                 TempData["Mensaje"] = $"No se encontró la película con el código identificador {IdPelicula}.";
                 return RedirectToAction(nameof(Index));
             }
 
-            _context.Peliculas.Remove(producto);
+            _context.Peliculas.Remove(pelicula);
             _context.SaveChanges();
 
-            TempData["Mensaje"] = $"La película {producto.Titulo} se eliminó correctamente.";
+            TempData["Mensaje"] = $"La película {pelicula.Titulo} se eliminó correctamente.";
             return RedirectToAction(nameof(Index));
         }
 
-        // Funciones Linq
+        // Funciones (consultas) Linq
+
+        [HttpPost]
+        public IActionResult FiltroGenero(string genero)
+        {
+            if (string.IsNullOrWhiteSpace(genero))
+            {
+                TempData["Mensaje"] = "Mostrando todas las películas, si desea filtrar por género, seleccione una opción.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            var resultado = _context.Peliculas.Where(p => p.Genero == genero).ToList();
+            if (!resultado.Any())
+            {
+                TempData["Mensaje"] = $"No se encontraron películas del género '{genero}'.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View("Index", resultado);
+        }
+
+        [HttpPost]
+        public IActionResult FiltroClasificacion(string publico)
+        {
+            if (string.IsNullOrWhiteSpace(publico))
+            {
+                TempData["Mensaje"] = "Mostrando todas las películas, si desea filtrar por público, seleccione una opción.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            var resultado = _context.Peliculas.Where(p => p.Publico == publico).ToList();
+            if (!resultado.Any())
+            {
+                TempData["Mensaje"] = $"No se encontraron películas para el público '{publico}'.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View("Index", resultado);
+        }
 
         public IActionResult OrderTitulo()
         {

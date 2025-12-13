@@ -1,0 +1,95 @@
+﻿@model Filmera.Models.Pelicula
+
+﻿@{
+    ViewData["Title"] = "Añadir película";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    @* IdPelicula *@
+    <div class="mb-3">
+        <label asp-for="IdPelicula" class="form-label"></label>
+        <input asp-for="IdPelicula" class="form-control" placeholder="Sin espacios, ej: 102340567" />
+        <span asp-validation-for="IdPelicula" class="text-danger"></span>
+    </div>
+
+    @* Título *@
+    <div class="mb-3">
+        <label asp-for="Titulo" class="form-label"></label>
+        <input asp-for="Titulo" class="form-control" />
+        <span asp-validation-for="Titulo" class="text-danger"></span>
+    </div>
+
+    @* Sinopsis *@
+    <div class="mb-3">
+        <label asp-for="Sinopsis" class="form-label"></label>
+        <input asp-for="Sinopsis" class="form-control" />
+        <span asp-validation-for="Sinopsis" class="text-danger"></span>
+    </div>
+
+    @* Director *@
+    <div class="mb-3">
+        <label asp-for="Director" class="form-label"></label>
+        <input asp-for="Director" class="form-control" />
+        <span asp-validation-for="Director" class="text-danger"></span>
+    </div>
+
+    @* Genero *@
+    <div class="mb-3">
+        <label asp-for="Genero" class="form-label"></label>
+        <select asp-for="Genero" class="form-select">
+            <option value="">Seleccione...</option>
+            <option value="Acción">Acción</option>
+            <option value="Terror">Terror</option>
+            <option value="Romance">Romance</option>
+            <option value="Suspenso">Suspenso</option>
+            <option value="Comedia">Comedia</option>
+            <option value="Fantasía">Fantasía</option>
+            <option value="Animación">Animación</option>
+            <option value="Drama">Drama</option>
+        </select>
+        <span asp-validation-for="Genero" class="text-danger"></span>
+    </div>
+
+    @* Duración *@
+    <div class="mb-3">
+        <label asp-for="Duracion" class="form-label"></label>
+        <input asp-for="Duracion" class="form-control" />
+        <span asp-validation-for="Duracion" class="text-danger"></span>
+    </div>
+
+    @* Calificación *@
+    <div class="mb-3">
+        <label asp-for="Calificacion" class="form-label"></label>
+        <input asp-for="Calificacion" class="form-control" />
+        <span asp-validation-for="Calificacion" class="text-danger"></span>
+    </div>
+
+    @* Lanzamiento *@
+    <div class="mb-3">
+        <label asp-for="Lanzamiento" class="form-label"></label>
+        <input asp-for="Lanzamiento" class="form-control" />
+        <span asp-validation-for="Lanzamiento" class="text-danger"></span>
+    </div>
+
+    @* Publico *@
+    <div class="mb-3">
+        <label asp-for="Publico" class="form-label"></label>
+        <select asp-for="Publico" class="form-select">
+            <option value="">Seleccione...</option>
+            <option value="G">G (Todo público)</option>
+            <option value="PG">PG (Supervisión de padres recomendada)</option>
+            <option value="PG-13">PG-13 (No apta para menores de 13)</option>
+            <option value="R">R (Restringida, menores requieren adulto)</option>
+            <option value="NC-17">NC-17 (Solo adultos)</option>
+        </select>
+        <span asp-validation-for="Publico" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Añadir</button>
+
+    <a class="btn btn-secondary" asp-action="Index">Volver</a>
+</form>
